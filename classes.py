@@ -1,36 +1,37 @@
 class Television:
+    """
+    A class representing details for a television object.
+    """
     MIN_CHANNEL = 0     # Minimum TV channel
     MAX_CHANNEL = 3     # Maximum TV channel
 
     MIN_VOLUME = 0      # Minimum TV volume
     MAX_VOLUME = 2      # Maximum TV volume
 
-    def __init__(self):
+    def __init__(self) -> None:
         """
-        - Create a private variable to store the TV channel. It should be set to the minimum TV channel by default.
-        - Create a private variable to store the TV volume. It should be set to the minimum TV volume by default.
-        - Create a private variable to store the TV status. The TV should start when it is off.
+        Contstructor to create initial state for television object.
+        Creates private variables for channel, volume, and power state.
+        Channel and volume variables are initialized at the minimum value, power is set to be off (0).
         """
         self.__channel = Television.MIN_CHANNEL
         self.__volume = Television.MIN_VOLUME
         self.__on = 0
 
-    def power(self):
+    def power(self) -> None:
         """
-        - This method should be used to turn the TV on/off.
-        - If called on a TV object that is off, the TV object should be turned on.
-        - If called on a TV object that is on, the TV object should be turned off.
+        Method to toggle the power state of the television object.
+        Sets the power to on (1) if off (0), and off if on.
         """
         if self.__on == 1:
             self.__on = 0
         else:
             self.__on = 1
 
-    def channel_up(self):
+    def channel_up(self) -> None:
         """
-        - This method should be used to adjust the TV channel by incrementing its value.
-        - It should only work for a TV that is on.
-        - If the method is called when one is on the MAX_CHANNEL, it should take the TV channel back to the MIN_CHANNEL.
+        Method to increase the channel value of the television object by 1.
+        Increasing the value while at the max value will cycle the channel back to the min value.
         """
         if self.__on == 1:
             if self.__channel + 1 > Television.MAX_CHANNEL:
@@ -38,11 +39,10 @@ class Television:
             else:
                 self.__channel += 1
 
-    def channel_down(self):
+    def channel_down(self) -> None:
         """
-        - This method should be used to adjust the TV channel by decrementing its value.
-        - It should only work for a TV that is on.
-        - If the method is called when one is on the MIN_CHANNEL, it should take the TV channel back to the MAX_CHANNEL.
+        Method to decrease the channel value of the television object by 1.
+        Decreasing the value while at the min value will cycle the channel back to the max value.
         """
         if self.__on == 1:
             if self.__channel - 1 < Television.MIN_CHANNEL:
@@ -50,29 +50,28 @@ class Television:
             else:
                 self.__channel -= 1
 
-    def volume_up(self):
+    def volume_up(self) -> None:
         """
-        - This method should be used to adjust the TV volume by incrementing its value.
-        - It should only work for a TV that is on.
-        - If the method is called when one is on the MAX_VOLUME, the volume should not be adjusted.
+        Method to increase the volume value of the television object by 1.
+        Increasing the value while at the max value will cause no change.
         """
         if self.__on == 1:
             if self.__volume + 1 <= Television.MAX_VOLUME:
                 self.__volume += 1
 
-    def volume_down(self):
+    def volume_down(self) -> None:
         """
-        - This method should be used to adjust the TV volume by decrementing its value.
-        - It should only work for a TV that is on.
-        - If the method is called when one is on the MIN_VOLUME, the volume should not be adjusted.
+        Method to decrease the volume value of the television object by 1.
+        Decreasing the value while at the min value will cause no change.
         """
         if self.__on == 1:
             if self.__volume - 1 >= Television.MIN_VOLUME:
                 self.__volume -= 1
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
-        - This method should be used to return the TV status using the format shown in the comments of main.py
+        Method to retrieve the power, channel, and volume status of the television object.
+        :return: Power state (True/False), channel number, and volume number.
         """
         power_status = ''
         if self.__on:
