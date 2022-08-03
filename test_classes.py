@@ -36,25 +36,34 @@ class TestCase(unittest.TestCase):
         self.t1.channel_down()
         self.assertEqual(self.t1.__str__(), 'TV status: Is on = True, Channel = 0, Volume = 0')
 
-    def test_volume(self):
+    def test_volume_up(self):
         self.t1.power()
         self.t1.volume_up()
         self.assertEqual(self.t1.__str__(), 'TV status: Is on = True, Channel = 0, Volume = 1')
+        self.t1.power()
+        self.t1.volume_up()
+        self.assertEqual(self.t1.__str__(), 'TV status: Is on = True, Channel = 0, Volume = 1')
+        self.t1.power()
+        self.t1.volume_up()
+        self.assertEqual(self.t1.__str__(), 'TV status: Is on = True, Channel = 0, Volume = 2')
+        self.t1.volume_up()
+        self.assertEqual(self.t1.__str__(), 'TV status: Is on = True, Channel = 0, Volume = 2')
+        
+    def test_volume_down(self):
+        self.t1.power()
         self.t1.volume_up()
         self.t1.volume_up()
         self.assertEqual(self.t1.__str__(), 'TV status: Is on = True, Channel = 0, Volume = 2')
         self.t1.volume_down()
         self.assertEqual(self.t1.__str__(), 'TV status: Is on = True, Channel = 0, Volume = 1')
+        self.t1.power()
         self.t1.volume_down()
-        self.t1.volume_down()
-        self.assertEqual(self.t1.__str__(), 'TV status: Is on = True, Channel = 0, Volume = 0')
-        self.t1.volume_up()
         self.assertEqual(self.t1.__str__(), 'TV status: Is on = True, Channel = 0, Volume = 1')
         self.t1.power()
-        self.t1.volume_up()
-        self.assertEqual(self.t1.__str__(), 'TV status: Is on = False, Channel = 0, Volume = 1')
         self.t1.volume_down()
-        self.assertEqual(self.t1.__str__(), 'TV status: Is on = False, Channel = 0, Volume = 1')
+        self.assertEqual(self.t1.__str__(), 'TV status: Is on = True, Channel = 0, Volume = 0')
+        self.t1.volume_down()
+        self.assertEqual(self.t1.__str__(), 'TV status: Is on = True, Channel = 0, Volume = 0')
 
 
 if __name__ == '__main__':
